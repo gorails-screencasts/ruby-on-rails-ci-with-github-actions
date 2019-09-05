@@ -1,6 +1,9 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  resources :ratings
+  resources :people
+  resources :projects
   namespace :admin do
     resources :users
     resources :announcements

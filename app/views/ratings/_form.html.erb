@@ -1,0 +1,39 @@
+<%= form_with(model: rating, local: true) do |form| %>
+  <% if rating.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(rating.errors.count, "error") %> prohibited this rating from being saved:</h2>
+
+      <ul>
+      <% rating.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :person_id %>
+    <%= form.text_field :person_id, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :score %>
+    <%= form.number_field :score, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <% if rating.persisted? %>
+      <div class="float-right">
+        <%= link_to 'Destroy', rating, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+
+    <%= form.submit class: 'btn btn-primary' %>
+
+    <% if rating.persisted? %>
+      <%= link_to "Cancel", rating, class: "btn btn-link" %>
+    <% else %>
+      <%= link_to "Cancel", ratings_path, class: "btn btn-link" %>
+    <% end %>
+  </div>
+<% end %>

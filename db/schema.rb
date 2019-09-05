@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_05_151417) do
+ActiveRecord::Schema.define(version: 2019_09_05_151548) do
 
   create_table "announcements", force: :cascade do |t|
     t.datetime "published_at"
@@ -43,6 +43,30 @@ ActiveRecord::Schema.define(version: 2019_09_05_151417) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "people", force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.string "name"
+    t.string "email"
+    t.integer "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_people_on_project_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer "person_id", null: false
+    t.integer "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_ratings_on_person_id"
+  end
+
   create_table "services", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "provider"
@@ -73,5 +97,7 @@ ActiveRecord::Schema.define(version: 2019_09_05_151417) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "people", "projects"
+  add_foreign_key "ratings", "people"
   add_foreign_key "services", "users"
 end

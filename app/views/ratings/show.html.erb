@@ -1,0 +1,18 @@
+<div class="page-header">
+  <%= link_to ratings_path, class: 'btn btn-default' do %>
+    All Ratings
+  <% end %>
+  <%= link_to edit_rating_path(@rating), class: 'btn btn-primary' do %>
+    Edit
+  <% end %>
+  <h1>Show rating</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Person:</dt>
+  <dd><%= @rating.person %></dd>
+
+  <dt>Score:</dt>
+  <dd><%= @rating.score %></dd>
+
+</dl>
