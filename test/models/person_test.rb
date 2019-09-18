@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class PersonTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "has no score by default" do
+    person = people(:one)
+    assert_nil person.score
+  end
 end

@@ -9,3 +9,17 @@
 #
 # two: {}
 # column: value
+
+regular:
+  first_name: Chris
+  last_name: Oliver
+  email: chris@gorails.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  admin: false
+
+admin:
+  first_name: Admin
+  last_name: User
+  email: admin@gorails.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  admin: true
