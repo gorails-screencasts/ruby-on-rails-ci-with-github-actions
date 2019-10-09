@@ -5,39 +5,48 @@ class ProjectsTest < ApplicationSystemTestCase
     @project = projects(:one)
   end
 
-  test "visiting the index" do
+  test "visit index" do
+    sign_in users(:regular)
     visit projects_url
     assert_selector "h1", text: "Projects"
   end
 
-  test "creating a Project" do
+  test "can create project" do
+    sign_in users(:regular)
     visit projects_url
-    click_on "New Project"
 
-    fill_in "Title", with: @project.title
+    click_on "Add New Project"
+    fill_in "Title", with: "Hello Test"
     click_on "Create Project"
 
-    assert_text "Project was successfully created"
-    click_on "Back"
+    assert_selector "h1", text: "Hello Test"
   end
 
-  test "updating a Project" do
-    visit projects_url
-    click_on "Edit", match: :first
+  test "can update a project" do
+    sign_in users(:regular)
 
-    fill_in "Title", with: @project.title
+    visit project_url(@project)
+    click_on "Edit"
+    fill_in "Title", with: "Hello Test"
     click_on "Update Project"
 
-    assert_text "Project was successfully updated"
-    click_on "Back"
+    assert_selector "h1", text: "Hello Test"
   end
 
-  test "destroying a Project" do
-    visit projects_url
-    page.accept_confirm do
-      click_on "Destroy", match: :first
-    end
+  test "can delete a project" do
+    sign_in users(:regular)
 
-    assert_text "Project was successfully destroyed"
+    visit project_url(@project)
+    click_on "Edit"
+
+    #page.accept_confirm do
+      #click_on "Destroy"
+    #end
+
+    click_on "Destroy"
+    click_on "Confirm"
+
+    assert_selector "h1", text: "Projects"
   end
+
 end
