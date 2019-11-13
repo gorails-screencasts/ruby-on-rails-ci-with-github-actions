@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2019_09_05_151548) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "announcements", force: :cascade do |t|
     t.datetime "published_at"
     t.string "announcement_type"
@@ -44,7 +47,7 @@ ActiveRecord::Schema.define(version: 2019_09_05_151548) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.integer "project_id", null: false
+    t.bigint "project_id", null: false
     t.string "name"
     t.string "email"
     t.integer "score"
@@ -60,7 +63,7 @@ ActiveRecord::Schema.define(version: 2019_09_05_151548) do
   end
 
   create_table "ratings", force: :cascade do |t|
-    t.integer "person_id", null: false
+    t.bigint "person_id", null: false
     t.integer "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -68,7 +71,7 @@ ActiveRecord::Schema.define(version: 2019_09_05_151548) do
   end
 
   create_table "services", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.string "provider"
     t.string "uid"
     t.string "access_token"
